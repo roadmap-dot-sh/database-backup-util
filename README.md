@@ -64,3 +64,68 @@ and backup operations.
 - Consider the performance implications of backup operations on the database server.
 - Implement proper error handling and logging mechanisms to track backup activities.
 - Ensure compatibility with different operating systems (Windows, Linux, macOS).
+
+## Run Application
+
+### 1. Clone repository
+
+```shell
+git clone https://github.com/roadmap-dot-sh/database-backup-util.git
+cd database-backup-util
+```
+
+### 2. Build the tool
+
+```shell
+mvn clean package
+```
+
+### 3. Run and test
+
+#### - Perform a backup
+
+```shell
+java -jar target/database-backup-util-1.0-SNAPSHOT.jar backup \
+  --db-type mysql \
+  --host localhost \
+  --port 3306 \
+  --username root \
+  --database mydb \
+  --backup-type full \
+  --compress true \
+  --storage local \
+  --storage-path /backups \
+  --slack-webhook https://hooks.slack.com/services/xxx
+```
+
+#### - Restore a backup
+
+```shell
+java -jar target/database-backup-util-1.0-SNAPSHOT.jar restore \
+  --db-type mysql \
+  --host localhost \
+  --port 3306 \
+  --username root \
+  --database mydb \
+  --backup-file /backups/mydb_20240101_120000.sql.gz \
+  --tables users,orders
+```
+
+#### - Schedule backups
+
+```shell
+java -jar target/database-backup-util-1.0-SNAPSHOT.jar schedule \
+  --cron "0 0 2 * * ?" \
+  --config-file backup-config.json
+```
+
+#### - Test connect
+
+```shell
+java -jar target/database-backup-util-1.0-SNAPSHOT.jar test-connection \
+  --db-type postgresql \
+  --host localhost \
+  --port 5432 \
+  --username postgres \
+  --database mydb
+```
