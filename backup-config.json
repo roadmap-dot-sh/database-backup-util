@@ -1,0 +1,13 @@
+{
+  "dbType": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "backup_user",
+  "password": "secure_password",
+  "database": "production_db",
+  "backupType": "full",
+  "compress": true,
+  "storage": "s3",
+  "storagePath": "my-backup-bucket/database-backups",
+  "slackWebhook": "https://hooks.slack.com/services/xxx"
+}
